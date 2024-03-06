@@ -1,0 +1,56 @@
+1.Given an array of integers, replace every element with the next greatest element 
+(greatest element on the right side) in the array. Since there is no element next 
+to the last element, replace it with -1. For example, if the array is {16, 17, 4, 3, 5, 2}, 
+then it should be modified to {17, 5, 5, 5, 2, -1}.
+
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> ans = {16, 17, 4, 3, 5, 2};
+    std::vector<int> res(ans);
+    std::sort(res.begin(), res.end());
+    int n=res.size()-1;
+    res[n]=-1;
+    int k=ans[n];
+    for(int i=1;i<res.size();i++){
+        res[n-i]=k;
+        if(ans[n-i]>k)
+            k=ans[n-i];
+    }
+    for(int it: res)
+        cout<<it<<" ";
+    return 0;
+}
+
+
+
+2.2. Given a Boolean matrix mat[M][N] of size M X N, modify it such that if
+ a matrix cell mat[i][j] is 1 then make its adjacent cells as 0.
+
+
+
+int main() {
+    vector<vector<int>>ans={ {1, 0, 1},
+        {0, 1, 0},
+        {1, 1, 1}};
+    for(int i=0;i<ans.size();i++){
+        for(int j=0;j<ans[i].size();j++){
+            if(ans[i][j]==1)
+            {
+                 if (i - 1 >= 0)ans[i - 1][j] = 0;
+                if (i + 1 < ans[i].size()) ans[i + 1][j] = 0;  
+                if (j - 1 >= 0) ans[i][j - 1] = 0;  
+                if (j + 1 <ans.size()) ans[i][j + 1] = 0;  
+            }
+        }
+    }
+    for(auto it: ans){
+        for(int i: it){
+            cout<<i<<' ';
+        }
+        cout<<endl;
+    }
+}
